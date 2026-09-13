@@ -35,20 +35,20 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative flex min-h-svh items-end justify-center bg-[#3f2a26] px-5 pb-12 pt-28 text-center text-white sm:items-center sm:pb-0" id="top">
-      <img className="absolute inset-0 h-full w-full object-[50%_70%] object-cover opacity-65 sm:object-[50%_65%]" src="/images/hero-wedding.webp" alt="Cặp đôi trong ngày cưới" fetchPriority="high" decoding="async" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#271612]/45 via-[#271612]/15 to-[#271612]/75" />
+    <section className="relative flex min-h-svh items-start justify-center bg-[#3f2a26] px-5 pb-12 pt-28 text-center text-white sm:items-center sm:pb-0" id="top">
+      <img className="absolute inset-x-0 top-0 h-[50svh] w-full object-[50%_70%] object-cover opacity-65 sm:inset-0 sm:h-full sm:object-[50%_65%]" src="/images/hero-wedding.webp" alt="Cặp đôi trong ngày cưới" fetchPriority="high" decoding="async" />
+      <div className="absolute inset-x-0 top-0 h-[50svh] bg-gradient-to-b from-[#271612]/45 via-[#271612]/15 to-[#3f2a26] sm:inset-0 sm:h-full sm:to-[#271612]/75" />
       <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="relative w-full max-w-6xl">
         <div className="-translate-y-20 sm:-translate-y-28">
           <p className="mb-5 text-xs tracking-[0.42em] uppercase text-[#f4d8c7]">Save the date</p>
           <p className="font-display whitespace-nowrap text-[1.45rem] leading-none tracking-[-0.04em] sm:text-6xl lg:text-7xl">{wedding.groom.name} <span className="mx-2 italic text-[#e9b89d] sm:mx-4">&amp;</span> {wedding.bride.name}</p>
           <p className="mt-8 text-sm tracking-[0.22em] text-[#fff7ef] uppercase">{wedding.displayDate}</p>
         </div>
-        <p className="mt-48 translate-y-16 text-[9px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10">Đếm ngược ngày vui</p>
-        <div className="mx-auto mt-5 max-w-3xl translate-y-16 grid gap-2 sm:translate-y-10 sm:grid-cols-2 sm:gap-3">
+        <p className="mt-64 text-[9px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10">Đếm ngược ngày vui</p>
+        <div className="mx-auto mt-5 grid max-w-3xl gap-2 sm:translate-y-10 sm:grid-cols-2 sm:gap-3">
           {wedding.ceremonies.map(ceremony => <CountdownCard key={ceremony.title} ceremony={ceremony} timeLeft={getCountdown(ceremony.startAt, now)} />)}
         </div>
-        <a href="#event" className="mt-9 inline-flex min-h-11 translate-y-16 items-center border border-[#f2c9b3] px-6 text-xs font-medium tracking-[0.2em] text-[#fff7ef] uppercase transition hover:bg-[#f2c9b3] hover:text-[#4a3029] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:translate-y-10">Xem lời mời</a>
+        <a href="#event" className="mt-9 inline-flex min-h-11 items-center border border-[#f2c9b3] px-6 text-xs font-medium tracking-[0.2em] text-[#fff7ef] uppercase transition hover:bg-[#f2c9b3] hover:text-[#4a3029] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:translate-y-10">Xem lời mời</a>
       </motion.div>
     </section>
   )
