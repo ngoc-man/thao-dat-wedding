@@ -44,11 +44,11 @@ export default function HeroSection() {
           <p className="font-display whitespace-nowrap text-[1.45rem] leading-none tracking-[-0.04em] sm:text-6xl lg:text-7xl">{wedding.groom.name} <span className="mx-2 italic text-[#e9b89d] sm:mx-4">&amp;</span> {wedding.bride.name}</p>
           <p className="mt-8 text-sm tracking-[0.22em] text-[#fff7ef] uppercase">{wedding.displayDate}</p>
         </div>
-        <p className="mt-32 translate-y-8 text-[9px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10">Đếm ngược ngày vui</p>
-        <div className="mx-auto mt-5 max-w-3xl translate-y-8 grid gap-2 sm:translate-y-10 sm:grid-cols-2 sm:gap-3">
+        <p className="mt-48 translate-y-16 text-[9px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10">Đếm ngược ngày vui</p>
+        <div className="mx-auto mt-5 max-w-3xl translate-y-16 grid gap-2 sm:translate-y-10 sm:grid-cols-2 sm:gap-3">
           {wedding.ceremonies.map(ceremony => <CountdownCard key={ceremony.title} ceremony={ceremony} timeLeft={getCountdown(ceremony.startAt, now)} />)}
         </div>
-        <a href="#event" className="mt-9 inline-flex min-h-11 translate-y-8 items-center border border-[#f2c9b3] px-6 text-xs font-medium tracking-[0.2em] text-[#fff7ef] uppercase transition hover:bg-[#f2c9b3] hover:text-[#4a3029] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:translate-y-10">Xem lời mời</a>
+        <a href="#event" className="mt-9 inline-flex min-h-11 translate-y-16 items-center border border-[#f2c9b3] px-6 text-xs font-medium tracking-[0.2em] text-[#fff7ef] uppercase transition hover:bg-[#f2c9b3] hover:text-[#4a3029] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:translate-y-10">Xem lời mời</a>
       </motion.div>
     </section>
   )
