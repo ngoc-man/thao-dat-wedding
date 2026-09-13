@@ -45,7 +45,7 @@ Lệnh này tự tạo ảnh WebP nhẹ trong `public/images/`. Website chỉ t�
 | `SUPABASE_SECRET_KEY` | Secret | Supabase → Settings → API Keys → Secret key |
 | `TURNSTILE_SECRET_KEY` | Secret | Secret key của Turnstile |
 
-4. Redeploy website. Trong Supabase → **Table Editor** → bảng `wishes`, lời chúc mới sẽ có `is_approved = false`. Bật thành `true` để hiện trên web; chọn dòng và bấm thùng rác để xóa.
+4. Mở SQL Editor một lần nữa, chạy nội dung file `supabase/enable-auto-approve.sql` để những dòng tạo thủ công trong Supabase cũng mặc định được duyệt. Lời chúc gửi từ website luôn hiển thị ngay; chọn dòng và bấm thùng rác để xóa nội dung không phù hợp.
 
 Không gửi hoặc commit các secret key. `SUPABASE_SECRET_KEY` và `TURNSTILE_SECRET_KEY` chỉ được lưu trong Cloudflare Pages, không xuất hiện ở trình duyệt.
 

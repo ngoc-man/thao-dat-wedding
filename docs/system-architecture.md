@@ -44,7 +44,7 @@ Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
 - Local `public/images` assets host the wedding images and QR.
 - Google Maps opens from the event-details link.
 - Cloudflare Turnstile validates each submitted wish before storage.
-- Supabase stores pending and approved wishes; only approved rows are returned to visitors.
+- Supabase stores guest wishes as approved by default; the public endpoint returns them immediately after Turnstile validation.
 
 Cloudflare Pages holds runtime secrets. Neither the Supabase secret key nor the Turnstile secret is bundled into the client.
 

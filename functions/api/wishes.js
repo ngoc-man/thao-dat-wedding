@@ -62,8 +62,8 @@ export async function onRequestPost({ request, env }) {
   const result = await fetch(`${env.SUPABASE_URL}/rest/v1/wishes`, {
     method: 'POST',
     headers: { ...supabaseHeaders(env), prefer: 'return=minimal' },
-    body: JSON.stringify({ name, message }),
+    body: JSON.stringify({ name, message, is_approved: true }),
   })
   if (!result.ok) return response({ error: 'Chưa thể gửi lời chúc. Vui lòng thử lại sau.' }, 502)
-  return response({ message: 'Lời chúc đã được gửi. Cảm ơn bạn thật nhiều!' }, 201)
+  return response({ message: 'Lời chúc đã được gửi và hiển thị ngay. Cảm ơn bạn thật nhiều!' }, 201)
 }

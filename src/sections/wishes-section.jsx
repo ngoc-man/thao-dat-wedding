@@ -71,6 +71,7 @@ export default function WishesSection() {
       setTurnstileToken('')
       window.turnstile?.reset(widgetId.current)
       setNotice(payload.message)
+      loadWishes().catch(() => {})
     } catch (requestError) {
       setError(requestError.message || 'Chưa thể gửi lời chúc. Vui lòng thử lại.')
     } finally {
