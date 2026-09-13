@@ -11,8 +11,11 @@ index.html
   -> src/main.jsx
      -> MotionConfig(reducedMotion="user")
         -> App
-           -> Hero | Couple | Event Details | Gallery | Bank QR | Thank You
+           -> Hero | Couple | Event Details | Gallery | Bank QR | Wishes | Thank You
               -> shared wedding data and reusable reveal components
+
+Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
+                                              -> Supabase wishes table
 ```
 
 ## Components
@@ -26,6 +29,9 @@ index.html
 | `src/sections/event-details-section.jsx` | Shows ceremony details and opens the configured Google Maps URL in a new tab. |
 | `src/sections/gallery-section.jsx` | Displays gallery thumbnails and manages local selected-image modal state. |
 | `src/sections/bank-qr-section.jsx` | Maps configured gift records into QR cards. |
+| `src/sections/wishes-section.jsx` | Renders the guest-wish form and approved-wish list. |
+| `functions/api/wishes.js` | Validates Turnstile server-side and reads/writes the Supabase table with a server-only credential. |
+| `supabase/wishes.sql` | Creates and locks down the moderated `wishes` table. |
 | `src/styles.css` | Imports Tailwind, defines font tokens, global layout rules, and reduced-motion CSS overrides. |
 
 ## Build and Dependencies
@@ -35,11 +41,12 @@ index.html
 ## External Boundaries
 
 - Google Fonts provides Bodoni Moda and Jost.
-- Unsplash hosts the image URLs referenced by the page data and hero section.
-- QR Server generates gift QR images from values encoded in their URLs.
+- Local `public/images` assets host the wedding images and QR.
 - Google Maps opens from the event-details link.
+- Cloudflare Turnstile validates each submitted wish before storage.
+- Supabase stores pending and approved wishes; only approved rows are returned to visitors.
 
-No backend service, data store, environment configuration, or internal HTTP API is present.
+Cloudflare Pages holds runtime secrets. Neither the Supabase secret key nor the Turnstile secret is bundled into the client.
 
 ## References
 

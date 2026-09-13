@@ -13,6 +13,7 @@ All notable project changes are recorded here.
 - Couple, event, gallery, gift QR, and thank-you sections.
 - Motion reveal effects and gallery modal animation.
 - Keyboard and pointer controls to close the gallery modal, plus visible keyboard focus styling.
+- Moderated guest-wish section, Supabase table schema, and Cloudflare Pages Function API protected by Turnstile.
 
 ### Changed
 
@@ -20,11 +21,12 @@ All notable project changes are recorded here.
 - Personalized the invitation for Ngọc Đạt and Nguyễn Thảo, including the displayed celebration dates.
 - Split the ceremony details into Vu Quy in Thăng Điền, Đà Nẵng on 26 September 2026 and Thành Hôn in Đông Hà, Quảng Trị on 1 October 2026; each has its own Google Maps link.
 - Revised the gift invitation and closing thank-you copy to emphasize that guests' presence and wishes are most valued.
+- Replaced two QR cards with one shared QR image and added QR zoom plus an account-number copy icon.
 
 ### Notes
 
-- Images and QR codes are currently requested from external Unsplash and QR Server URLs at runtime.
-- The app has no API endpoints, persistence, RSVP form, authentication, or payment processing.
+- Wedding images and QR are local public assets optimized for web delivery.
+- Guest wishes require the documented Supabase and Cloudflare environment configuration before they accept submissions.
 
 ## References
 

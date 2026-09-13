@@ -1,4 +1,4 @@
-import { BankQrSection, CoupleSection, EventDetailsSection, GallerySection, HeroSection, ThankYouSection } from './sections'
+import { BankQrSection, CoupleSection, EventDetailsSection, GallerySection, HeroSection, ThankYouSection, WishesSection } from './sections'
 
 export default function App() {
   return (
@@ -8,6 +8,7 @@ export default function App() {
       <EventDetailsSection />
       <GallerySection />
       <BankQrSection />
+      <WishesSection />
       <ThankYouSection />
     </main>
   )
