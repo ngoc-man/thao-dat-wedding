@@ -28,13 +28,16 @@ function sanitize(value) {
   return String(value || '').trim().replace(/\s+/g, ' ')
 }
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ request, env }) {
   if (!configured(env)) return response({ error: 'Chức năng lời chúc đang được thiết lập.' }, 503)
+  const requestUrl = new URL(request.url)
+  const offset = Math.max(0, Number.parseInt(requestUrl.searchParams.get('offset'), 10) || 0)
   const url = new URL(`${env.SUPABASE_URL}/rest/v1/wishes`)
   url.searchParams.set('select', 'id,name,message,created_at')
   url.searchParams.set('is_approved', 'eq.true')
   url.searchParams.set('order', 'created_at.desc')
-  url.searchParams.set('limit', '20')
+  url.searchParams.set('limit', '10')
+  url.searchParams.set('offset', String(offset))
   const result = await fetch(url, { headers: supabaseHeaders(env) })
   if (!result.ok) return response({ error: 'Không tải được lời chúc lúc này.' }, 502)
   return response(await result.json())
