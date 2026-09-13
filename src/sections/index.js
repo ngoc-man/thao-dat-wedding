@@ -1,0 +1,6 @@
+export { default as HeroSection } from './hero-section'
+export { default as CoupleSection } from './couple-section'
+export { default as EventDetailsSection } from './event-details-section'
+export { default as GallerySection } from './gallery-section'
+export { default as BankQrSection } from './bank-qr-section'
+export { default as ThankYouSection } from './thank-you-section'

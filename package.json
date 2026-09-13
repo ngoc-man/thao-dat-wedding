@@ -1,0 +1,23 @@
+{
+  "name": "wedding-single-page",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm exec -- vite",
+    "build": "npm exec -- vite build",
+    "preview": "npm exec -- vite preview",
+    "optimize:images": "bash scripts/optimize-wedding-images.sh"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "motion": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "latest",
+    "tailwindcss": "latest"
+  }
+}
