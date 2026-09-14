@@ -15,7 +15,7 @@ All notable project changes are recorded here.
 - Keyboard and pointer controls to close the gallery modal, plus visible keyboard focus styling.
 - Moderated guest-wish section, Supabase table schema, and Cloudflare Pages Function API protected by Turnstile.
 - A polished root invitation selector that directs guests to the groom or bride invitation.
-- Cloudflare Pages rewrite rules for direct `/groom` and `/bride` visits.
+- Dedicated Vite HTML entries for direct `/groom` and `/bride` visits on Cloudflare Pages.
 
 ### Changed
 
@@ -28,6 +28,8 @@ All notable project changes are recorded here.
 - Changed guest wishes to show immediately after submission; unsuitable wishes can be deleted manually in Supabase.
 - Refined the invitation selector by raising the bride card image crop and removing its closing helper line.
 - Stabilized invitation-card hover behavior: cards no longer shift position; only the background photo scales subtly.
+- Made selector navigation client-side so selecting a side changes the invitation without requiring a full-page request.
+- Replaced fallback-dependent route rewrites with dedicated entry documents, preventing Cloudflare Pages from redirecting invitation links to the selector.
 
 ### Notes
 

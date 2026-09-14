@@ -35,7 +35,7 @@ Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
 | `functions/api/wishes.js` | Validates Turnstile server-side and reads/writes the Supabase table with a server-only credential. |
 | `supabase/wishes.sql` | Creates and locks down the moderated `wishes` table. |
 | `src/styles.css` | Imports Tailwind, defines font tokens, global layout rules, and reduced-motion CSS overrides. |
-| `public/_redirects` | Rewrites direct Cloudflare Pages visits to `/groom` and `/bride` to the React entry page. |
+| `groom.html`, `bride.html` | Separate Vite entry documents so Cloudflare Pages serves direct groom and bride links without falling back to `/`. |
 
 ## Build and Dependencies
 
