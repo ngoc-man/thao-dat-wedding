@@ -8,7 +8,8 @@ export const wedding = {
   ],
   attireNote: 'Chỉ cần mặc bộ đẹp nhất và tới quẩy hết mình cùng bọn mình nha!',
   gallery: Array.from({ length: 10 }, (_, index) => `/images/gallery-${String(index + 1).padStart(2, '0')}.webp`),
-  gifts: [
-    { owner: 'Mừng cưới', bank: 'Viettinbank', account: '108881436439', qr: '/images/qr.jpg' },
-  ],
+  gifts: {
+    groom: { owner: 'Mừng cưới', bank: 'Viettinbank', account: '108881436439', qr: '/images/qr.jpg' },
+    bride: { owner: 'Mừng cưới', bank: 'Vietcombank', account: '1022565314', qr: '/images/qr-bride.jpg' },
+  },
 }

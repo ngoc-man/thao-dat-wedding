@@ -28,7 +28,7 @@ Sau mỗi lần thay ảnh, chạy:
 npm run optimize:images
 ```
 
-Lệnh này tự tạo ảnh WebP nhẹ trong `public/images/`. Website chỉ tải WebP để trang mượt hơn; không cần chỉnh code. QR giữ trực tiếp tại `public/images/qr.jpg`.
+Lệnh này tự tạo ảnh WebP nhẹ trong `public/images/`. Website chỉ tải WebP để trang mượt hơn; không cần chỉnh code. QR giữ trực tiếp tại `public/images/qr.jpg` (nhà trai) và `public/images/qr-bride.jpg` (nhà gái).
 
 > Lệnh nén cần `cwebp` (WebP tools). Nếu Terminal báo `Missing cwebp`, cài WebP tools trước rồi chạy lại lệnh trên.
 
@@ -56,3 +56,9 @@ npm run build
 ```
 
 Nếu lệnh hoàn tất không báo lỗi, website đã build thành công.
+
+## Link gửi lời mời
+
+- `https://thao-dat-wedding.pages.dev/groom`: lời mời nhà trai, dùng QR của Ngọc Đạt.
+- `https://thao-dat-wedding.pages.dev/bride`: lời mời nhà gái, dùng QR của Nguyễn Thảo.
+- `https://thao-dat-wedding.pages.dev`: trang chọn lời mời đẹp mắt để người xem tự chọn nhà trai hoặc nhà gái.

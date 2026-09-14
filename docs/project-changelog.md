@@ -14,6 +14,8 @@ All notable project changes are recorded here.
 - Motion reveal effects and gallery modal animation.
 - Keyboard and pointer controls to close the gallery modal, plus visible keyboard focus styling.
 - Moderated guest-wish section, Supabase table schema, and Cloudflare Pages Function API protected by Turnstile.
+- A polished root invitation selector that directs guests to the groom or bride invitation.
+- Cloudflare Pages rewrite rules for direct `/groom` and `/bride` visits.
 
 ### Changed
 
@@ -22,6 +24,10 @@ All notable project changes are recorded here.
 - Split the ceremony details into Vu Quy in Thăng Điền, Đà Nẵng on 26 September 2026 and Thành Hôn in Đông Hà, Quảng Trị on 1 October 2026; each has its own Google Maps link.
 - Revised the gift invitation and closing thank-you copy to emphasize that guests' presence and wishes are most valued.
 - Replaced two QR cards with one shared QR image and added QR zoom plus an account-number copy icon.
+- Split the public invitation into `/groom` and `/bride` while retaining one shared page implementation. The groom page uses the existing QR; the bride page uses Vietcombank account `1022565314` and `qr-bride.jpg`.
+- Changed guest wishes to show immediately after submission; unsuitable wishes can be deleted manually in Supabase.
+- Refined the invitation selector by raising the bride card image crop and removing its closing helper line.
+- Stabilized invitation-card hover behavior: cards no longer shift position; only the background photo scales subtly.
 
 ### Notes
 
