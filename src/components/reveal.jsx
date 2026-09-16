@@ -14,11 +14,11 @@ export function Reveal({ children, className = '' }) {
   )
 }
 
-export function SectionHeading({ eyebrow, title, description }) {
+export function SectionHeading({ eyebrow, title, description, titleClassName = 'text-4xl sm:text-5xl' }) {
   return (
     <Reveal className="mx-auto mb-12 max-w-xl text-center">
       <p className="mb-3 text-xs font-medium tracking-[0.28em] text-[#a56c61] uppercase">{eyebrow}</p>
-      <h2 className="font-display text-4xl leading-tight text-[#4a3029] sm:text-5xl">{title}</h2>
+      <h2 className={`font-display leading-tight text-[#4a3029] ${titleClassName}`}>{title}</h2>
       {description && <p className="mt-4 text-sm leading-7 text-[#725f56] sm:text-base">{description}</p>}
     </Reveal>
   )

@@ -19,7 +19,11 @@ Terminal sẽ hiện một đường dẫn như `http://localhost:5173`. Mở đ
 hero-wedding.jpg
 groom.jpg
 bride.jpg
-gallery-01.jpg đến gallery-10.jpg
+DSC06642.jpg, DSC06710.jpg, DSC06774.jpg, DSC06838.jpg
+DSC06483.jpg, DSC06530.jpg, DSC06542.jpg, DSC06566.jpg
+DSC06288.jpg, DSC06329.jpg, DSC06367.jpg, DSC06394.jpg, DSC06433.jpg, DSC06464.jpg
+DSC05891.jpg, DSC06025.jpg, DSC06134.jpg, DSC06254.jpg, DSC06270.jpg
+DSC05606.jpg, DSC05670.jpg, DSC05702.jpg, DSC05759.jpg, DSC05838.jpg
 ```
 
 Sau mỗi lần thay ảnh, chạy:
@@ -28,7 +32,7 @@ Sau mỗi lần thay ảnh, chạy:
 npm run optimize:images
 ```
 
-Lệnh này tự tạo ảnh WebP nhẹ trong `public/images/`. Website chỉ tải WebP để trang mượt hơn; không cần chỉnh code. QR giữ trực tiếp tại `public/images/qr.jpg` (nhà trai) và `public/images/qr-bride.jpg` (nhà gái).
+Lệnh này tự tạo ảnh WebP nhẹ trong `public/images/`. Website chỉ tải WebP để trang mượt hơn; không cần chỉnh code. QR giữ trực tiếp tại `public/images/qr.jpg`.
 
 > Lệnh nén cần `cwebp` (WebP tools). Nếu Terminal báo `Missing cwebp`, cài WebP tools trước rồi chạy lại lệnh trên.
 
@@ -59,6 +63,4 @@ Nếu lệnh hoàn tất không báo lỗi, website đã build thành công.
 
 ## Link gửi lời mời
 
-- `https://thao-dat-wedding.pages.dev/groom`: lời mời nhà trai, dùng QR của Ngọc Đạt.
-- `https://thao-dat-wedding.pages.dev/bride`: lời mời nhà gái, dùng QR của Nguyễn Thảo.
-- `https://thao-dat-wedding.pages.dev`: trang chọn lời mời đẹp mắt để người xem tự chọn nhà trai hoặc nhà gái.
+Gửi duy nhất link `https://thao-dat-wedding.pages.dev` cho tất cả khách mời.

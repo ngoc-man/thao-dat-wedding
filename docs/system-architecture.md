@@ -11,8 +11,7 @@ index.html
   -> src/main.jsx
      -> MotionConfig(reducedMotion="user")
         -> App
-           -> / (invitation selector)
-           -> /groom or /bride: Hero | Couple | Event Details | Gallery | Bank QR | Wishes | Thank You
+           -> Hero | Couple | Event Details | Gallery | Bank QR | Wishes | Thank You
               -> shared wedding data and reusable reveal components
 
 Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
@@ -23,19 +22,17 @@ Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
 
 | Area | Responsibility |
 | --- | --- |
-| `src/app.jsx` | Selects the root invitation chooser or the shared invitation page based on the URL path. |
-| `src/data/wedding.js` | Holds editable invitation content, image URLs, map URL, and groom/bride QR configuration. |
-| `src/sections/invitation-selector.jsx` | Displays the polished root page and links guests to `/groom` or `/bride`. |
+| `src/app.jsx` | Renders the ordered invitation sections inside the visual shell. |
+| `src/data/wedding.js` | Holds editable invitation content, image URLs, map URL, and one QR configuration. |
 | `src/components/reveal.jsx` | Provides viewport-triggered entrance animation and shared section heading markup. |
 | `src/sections/hero-section.jsx` | Calculates and displays the live countdown, couple names, and event anchor link. |
 | `src/sections/event-details-section.jsx` | Shows ceremony details and opens the configured Google Maps URL in a new tab. |
 | `src/sections/gallery-section.jsx` | Displays gallery thumbnails and manages local selected-image modal state. |
-| `src/sections/bank-qr-section.jsx` | Renders the QR card selected by the current invitation URL. |
+| `src/sections/bank-qr-section.jsx` | Renders the shared gift QR card, QR lightbox, and account-number copy control. |
 | `src/sections/wishes-section.jsx` | Renders the guest-wish form and approved-wish list. |
 | `functions/api/wishes.js` | Validates Turnstile server-side and reads/writes the Supabase table with a server-only credential. |
 | `supabase/wishes.sql` | Creates and locks down the moderated `wishes` table. |
 | `src/styles.css` | Imports Tailwind, defines font tokens, global layout rules, and reduced-motion CSS overrides. |
-| `groom.html`, `bride.html` | Separate Vite entry documents so Cloudflare Pages serves direct groom and bride links without falling back to `/`. |
 
 ## Build and Dependencies
 
@@ -44,7 +41,7 @@ Browser -> /api/wishes (Cloudflare Pages Function) -> Turnstile Siteverify
 ## External Boundaries
 
 - Google Fonts provides Bodoni Moda and Jost.
-- Local `public/images` assets host the wedding images and the two side-specific QR codes.
+- Local `public/images` assets host the wedding images and shared QR code.
 - Google Maps opens from the event-details link.
 - Cloudflare Turnstile validates each submitted wish before storage.
 - Supabase stores guest wishes as approved by default; the public endpoint returns them immediately after Turnstile validation.

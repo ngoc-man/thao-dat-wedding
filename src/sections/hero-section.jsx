@@ -10,12 +10,12 @@ function getCountdown(startAt, now) {
 
 function CountdownCard({ ceremony, timeLeft }) {
   return (
-    <div className="border border-white/30 bg-[#2e1c18]/35 px-2 py-3 backdrop-blur-sm sm:px-3 sm:py-4">
-      <p className="font-display text-lg text-[#ffe7d8] sm:text-xl">{ceremony.title}</p>
-      <p className="mt-1 text-[10px] tracking-[0.12em] text-white/75 uppercase">{ceremony.date}</p>
-      {timeLeft ? <div className="mt-3 grid grid-cols-4 border-t border-white/20 pt-3">
-        {Object.entries(timeLeft).map(([unit, value]) => <div key={unit}><strong className="block font-display text-lg sm:text-xl">{String(value).padStart(2, '0')}</strong><span className="text-[7px] tracking-[0.08em] text-white/65 uppercase">{unit}</span></div>)}
-      </div> : <p className="mt-3 border-t border-white/20 pt-3 text-xs leading-5 text-[#ffe8da]">Cảm ơn bạn đã dành tình cảm và cùng lưu giữ niềm vui của chúng mình.</p>}
+    <div className="border border-white/30 bg-[#2e1c18]/35 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-5">
+      <p className="font-display text-xl text-[#ffe7d8] sm:text-2xl">{ceremony.title}</p>
+      <p className="mt-1.5 text-[10px] tracking-[0.12em] text-white/75 uppercase sm:text-[11px]">{ceremony.date}</p>
+      {timeLeft ? <div className="mt-4 grid grid-cols-4 border-t border-white/20 pt-4">
+        {Object.entries(timeLeft).map(([unit, value]) => <div key={unit}><strong className="block font-display text-xl sm:text-2xl">{String(value).padStart(2, '0')}</strong><span className="text-[7px] tracking-[0.08em] text-white/65 uppercase sm:text-[8px]">{unit}</span></div>)}
+      </div> : <p className="mt-4 border-t border-white/20 pt-4 text-sm leading-6 text-[#ffe8da]">Cảm ơn bạn đã dành tình cảm và cùng lưu giữ niềm vui của chúng mình.</p>}
     </div>
   )
 }
@@ -44,8 +44,8 @@ export default function HeroSection() {
           <p className="font-display whitespace-nowrap text-[1.45rem] leading-none tracking-[-0.04em] sm:text-6xl lg:text-7xl">{wedding.groom.name} <span className="mx-2 italic text-[#e9b89d] sm:mx-4">&amp;</span> {wedding.bride.name}</p>
           <p className="mt-8 text-sm tracking-[0.22em] text-[#fff7ef] uppercase">{wedding.displayDate}</p>
         </div>
-        <p className="mt-64 text-[9px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10">Đếm ngược ngày vui</p>
-        <div className="mx-auto mt-5 grid max-w-3xl gap-2 sm:translate-y-10 sm:grid-cols-2 sm:gap-3">
+        <p className="mt-64 text-[11px] tracking-[0.28em] text-[#f4d8c7] uppercase sm:mt-36 sm:translate-y-10 sm:text-xs">Đếm ngược ngày vui</p>
+        <div className="mx-auto mt-5 grid max-w-3xl gap-3 sm:translate-y-10 sm:grid-cols-2 sm:gap-4">
           {wedding.ceremonies.map(ceremony => <CountdownCard key={ceremony.title} ceremony={ceremony} timeLeft={getCountdown(ceremony.startAt, now)} />)}
         </div>
         <a href="#event" className="mt-9 inline-flex min-h-11 items-center border border-[#f2c9b3] px-6 text-xs font-medium tracking-[0.2em] text-[#fff7ef] uppercase transition hover:bg-[#f2c9b3] hover:text-[#4a3029] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:translate-y-10">Xem lời mời</a>
