@@ -38,6 +38,7 @@ export default function HeroSection() {
     <section className="relative flex min-h-svh items-start justify-center bg-[#3f2a26] px-5 pb-12 pt-28 text-center text-white sm:items-center sm:pb-0" id="top">
       <img className="absolute inset-x-0 top-0 h-[50svh] w-full object-[50%_70%] object-cover opacity-65 sm:inset-0 sm:h-full sm:object-[50%_65%]" src="/images/hero-wedding.webp" alt="Cặp đôi trong ngày cưới" fetchPriority="high" decoding="async" />
       <div className="absolute inset-x-0 top-0 h-[50svh] bg-gradient-to-b from-[#271612]/45 via-[#271612]/15 to-[#3f2a26] sm:inset-0 sm:h-full sm:to-[#271612]/75" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">{Array.from({ length: 16 }, (_, index) => <span key={index} className={`hero-petal hero-petal-${(index % 8) + 1} hero-petal-extra-${index}`}>{index % 3 === 0 ? '✦' : '❋'}</span>)}</div>
       <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="relative w-full max-w-6xl">
         <div className="-translate-y-20 sm:-translate-y-28">
           <p className="mb-5 text-xs tracking-[0.42em] uppercase text-[#f4d8c7]">Save the date</p>

@@ -64,3 +64,7 @@ Nếu lệnh hoàn tất không báo lỗi, website đã build thành công.
 ## Link gửi lời mời
 
 Gửi duy nhất link `https://thao-dat-wedding.pages.dev` cho tất cả khách mời.
+
+## Nhạc nền
+
+Website dùng bản **Ragtime Wedding March** (1905), nhạc piano public domain từ Wikimedia Commons. File nằm tại `public/audio/wedding-theme.mp3`; có nút loa ở góc dưới bên phải để khách tắt hoặc bật nhạc.

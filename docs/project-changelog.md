@@ -26,6 +26,7 @@ All notable project changes are recorded here.
 - Restored one root invitation page with `qr.jpg` as the shared QR code, removed side-specific invitation routes, increased the QR card scale, and moved Vu Quy to 10:00.
 - Replaced the ten placeholder gallery images with twenty-three optimized wedding photos supplied in `source-images/`.
 - Expanded the gallery to twenty-four images with `DSC06367`, enlarged the desktop grid, and corrected four portrait crops to preserve faces.
+- Added low-volume looping piano background music, a persistent sound toggle, subtle Hero sparkles, and a short heart burst after a successful wish submission.
 
 ### Notes
 
