@@ -2,6 +2,23 @@
 
 All notable project changes are recorded here.
 
+## 2026-09-17
+
+### Changed
+
+- Added a one-tap mute/restore control that remembers the guest's previous music volume.
+- Reworked the gallery into a looping 3D column carousel (four columns by two rows on desktop); swipe distance now controls how many columns advance.
+- Rebuilt the lightbox as a cyclic 3D carousel with stable keyed images, idle image decoding, spring settling, a translucent backdrop, and backdrop-click dismissal.
+- Removed dimmed edge images from the inline carousel and added velocity-based momentum; a strong lightbox swipe can now glide through several photos before easing to rest.
+- Flattened the inline carousel so every thumbnail keeps an equal size, and changed long momentum settling to a non-bouncing deceleration.
+- Fixed the inline carousel render window for small galleries and removed all thumbnail hover scaling.
+- Replaced carousel index rebasing with continuous virtual positions, eliminating end-of-glide resets for both the looping thumbnail strip and lightbox.
+- Corrected momentum target math and excluded lightbox controls from drag capture so flicks and navigation buttons settle reliably.
+- Restored thumbnail tap-to-zoom on touch devices by separating short taps from drag gestures.
+- Prevented swipe-end clicks without delaying the next genuine tap, so mobile gallery zoom and outside-tap dismissal respond on the first touch.
+- Gently increased the density and rhythm of Hero sparkle effects.
+- Added `DSC05702` as the softly overlaid background for the guest-wishes section.
+
 ## 2026-09-13
 
 ### Added
