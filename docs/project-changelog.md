@@ -22,6 +22,8 @@ All notable project changes are recorded here.
 - Let a thumbnail tap interrupt gallery momentum immediately, and moved the mobile wishes background crop farther upward.
 - Aligned the mobile wishes background to its top edge to keep faces clear of the form.
 - Made the wishes form card gently translucent so the background photo remains visible.
+- Increased the upward mobile crop of the wishes background image.
+- Removed the photo background from the wishes section and restored its clean cream card treatment.
 
 ## 2026-09-13
 
