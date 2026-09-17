@@ -10,6 +10,7 @@ export function useInfiniteCarousel({ initialIndex, itemSize, itemCount, maxStep
   const clearDragTimer = useRef(null)
   const moving = useRef(false)
   const animation = useRef(null)
+  const animationVersion = useRef(0)
   const onSettledRef = useRef(onSettled)
   const previousInitial = useRef(initialIndex)
   const mounted = useRef(true)
@@ -29,15 +30,26 @@ export function useInfiniteCarousel({ initialIndex, itemSize, itemCount, maxStep
 
   const finish = useCallback((target, distance) => {
     moving.current = true
+    const version = ++animationVersion.current
     animation.current = animate(position, target, reduceMotion
       ? { duration: 0.01 }
       : { type: 'tween', duration: Math.min(1.05, 0.26 + Math.abs(distance) * 0.12), ease: [0.16, 1, 0.3, 1] })
     animation.current.then(() => {
-      if (!mounted.current) return
+      if (!mounted.current || version !== animationVersion.current) return
       moving.current = false
       onSettledRef.current(wrap(Math.round(target), itemCount))
     })
   }, [itemCount, position, reduceMotion])
+
+  const stopMotion = useCallback(() => {
+    if (!moving.current) return
+    animationVersion.current += 1
+    animation.current?.stop()
+    moving.current = false
+    const settledPosition = Math.round(position.get())
+    position.set(settledPosition)
+    onSettledRef.current(wrap(settledPosition, itemCount))
+  }, [itemCount, position])
 
   const navigate = useCallback(direction => {
     if (moving.current || itemCount < 2) return
@@ -47,9 +59,10 @@ export function useInfiniteCarousel({ initialIndex, itemSize, itemCount, maxStep
 
   const pointerHandlers = {
     onPointerDown: event => {
-      if (moving.current || itemCount < 2) return
+      if (itemCount < 2) return
       if (event.pointerType === 'mouse' && event.button !== 0) return
       if (event.target instanceof Element && event.target.closest('[data-no-drag]')) return
+      stopMotion()
       pointer.current = { id: event.pointerId, startX: event.clientX, startPosition: position.get(), startedAt: performance.now() }
       dragged.current = false
       const captureTarget = event.target instanceof Element ? event.target : event.currentTarget

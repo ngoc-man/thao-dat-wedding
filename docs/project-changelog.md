@@ -18,6 +18,9 @@ All notable project changes are recorded here.
 - Prevented swipe-end clicks without delaying the next genuine tap, so mobile gallery zoom and outside-tap dismissal respond on the first touch.
 - Gently increased the density and rhythm of Hero sparkle effects.
 - Added `DSC05702` as the softly overlaid background for the guest-wishes section.
+- Promoted gallery thumbnail layers to the compositor and virtualized offscreen mobile columns to reduce swipe jank, and moved the wishes background crop upward on narrow screens.
+- Let a thumbnail tap interrupt gallery momentum immediately, and moved the mobile wishes background crop farther upward.
+- Aligned the mobile wishes background to its top edge to keep faces clear of the form.
 
 ## 2026-09-13
 
