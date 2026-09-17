@@ -21,6 +21,7 @@ All notable project changes are recorded here.
 - Promoted gallery thumbnail layers to the compositor and virtualized offscreen mobile columns to reduce swipe jank, and moved the wishes background crop upward on narrow screens.
 - Let a thumbnail tap interrupt gallery momentum immediately, and moved the mobile wishes background crop farther upward.
 - Aligned the mobile wishes background to its top edge to keep faces clear of the form.
+- Made the wishes form card gently translucent so the background photo remains visible.
 
 ## 2026-09-13
 
