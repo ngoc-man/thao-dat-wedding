@@ -7,12 +7,13 @@ const wrap = (value, length) => ((value % length) + length) % length
 
 export default function GalleryCarousel({ photos, crops, onOpen }) {
   const stage = useRef(null)
-  const [stageWidth, setStageWidth] = useState(0)
-  const [visibleColumns, setVisibleColumns] = useState(4)
+  const [stageWidth, setStageWidth] = useState(null)
+  const [visibleColumns, setVisibleColumns] = useState(2)
   const [activeColumn, setActiveColumn] = useState(0)
   const [renderAnchor, setRenderAnchor] = useState(0)
   const columnCount = Math.ceil(photos.length / PHOTOS_PER_COLUMN)
-  const columnWidth = Math.max(stageWidth / visibleColumns, 1)
+  const isReady = stageWidth > 0
+  const columnWidth = Math.max((stageWidth ?? 0) / visibleColumns, 1)
   const { position, navigate, pointerHandlers, consumeDraggedClick } = useInfiniteCarousel({
     initialIndex: 0,
     itemSize: columnWidth,
@@ -44,8 +45,8 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
 
   return (
     <div className="relative mx-auto max-w-7xl">
-      <div ref={stage} className="relative aspect-square select-none overflow-hidden rounded-sm touch-pan-y md:aspect-[2/1]" {...pointerHandlers}>
-        {getRenderedColumns(columnCount, visibleColumns, renderAnchor).map(columnIndex => (
+      <div ref={stage} className="relative aspect-square select-none overflow-hidden rounded-sm touch-pan-y md:aspect-[2/1]" aria-busy={!isReady} {...(isReady ? pointerHandlers : {})}>
+        {isReady && getRenderedColumns(columnCount, visibleColumns, renderAnchor).map(columnIndex => (
           <GalleryColumn
             key={columnIndex}
             columnIndex={columnIndex}
@@ -61,8 +62,8 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
           />
         ))}
       </div>
-      <CarouselArrow direction={-1} onClick={() => navigate(-1)} label="Xem ảnh trước" />
-      <CarouselArrow direction={1} onClick={() => navigate(1)} label="Xem ảnh tiếp theo" />
+      <CarouselArrow direction={-1} onClick={() => navigate(-1)} label="Xem ảnh trước" disabled={!isReady} />
+      <CarouselArrow direction={1} onClick={() => navigate(1)} label="Xem ảnh tiếp theo" disabled={!isReady} />
     </div>
   )
 }
@@ -96,13 +97,20 @@ function GalleryColumn({ columnIndex, columnCount, columnWidth, visibleColumns, 
   return (
     <motion.div className={`absolute inset-y-0 left-0 grid grid-rows-2 gap-3 px-1.5 will-change-transform [backface-visibility:hidden] ${isInteractive ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`} style={{ width: columnWidth, x }} aria-hidden={!isInteractive}>
       {photoIndexes.map(index => <button key={photos[index]} type="button" tabIndex={isInteractive ? 0 : -1} onClick={() => { if (!consumeDraggedClick()) onOpen(index) }} className="group relative min-h-0 overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#fff7ef]" aria-label={`Phóng to ảnh cưới ${index + 1}`}>
-        <img src={photos[index]} alt={`Khoảnh khắc cưới ${index + 1}`} loading="lazy" draggable="false" className={`h-full w-full object-cover [backface-visibility:hidden] ${crops[photos[index]] ?? 'object-center'}`} />
+        <picture className="block h-full w-full">
+          <source media="(min-width: 768px)" srcSet={photos[index]} />
+          <img src={thumbnailPath(photos[index])} alt={`Khoảnh khắc cưới ${index + 1}`} loading="lazy" draggable="false" className={`h-full w-full object-cover [backface-visibility:hidden] ${crops[photos[index]] ?? 'object-center'}`} />
+        </picture>
         <span className="absolute inset-0 bg-[#4a3029]/0 transition group-hover:bg-[#4a3029]/15" />
       </button>)}
     </motion.div>
   )
 }
 
-function CarouselArrow({ direction, onClick, label }) {
-  return <button type="button" onClick={onClick} className={`absolute top-1/2 z-30 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/50 bg-[#4a3029]/85 text-2xl text-white shadow-lg backdrop-blur-sm transition hover:scale-110 hover:bg-[#6b463c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9c6257] ${direction < 0 ? 'left-1 sm:-left-5' : 'right-1 sm:-right-5'}`} aria-label={label}>{direction < 0 ? '‹' : '›'}</button>
+function thumbnailPath(photo) {
+  return photo.replace('/images/', '/images/thumbs/')
+}
+
+function CarouselArrow({ direction, onClick, label, disabled }) {
+  return <button type="button" onClick={onClick} disabled={disabled} className={`absolute top-1/2 z-30 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/50 bg-[#4a3029]/85 text-2xl text-white shadow-lg backdrop-blur-sm transition hover:scale-110 hover:bg-[#6b463c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9c6257] disabled:pointer-events-none disabled:opacity-0 ${direction < 0 ? 'left-1 sm:-left-5' : 'right-1 sm:-right-5'}`} aria-label={label}>{direction < 0 ? '‹' : '›'}</button>
 }

@@ -16,7 +16,6 @@ export default function GalleryLightbox({ photos, selectedIndex, onSelect, onClo
     maxSteps: Math.min(MAX_MOMENTUM_STEPS, Math.max(photos.length - 1, 1)),
     onSettled: onSelect,
   })
-
   useEffect(() => {
     const overflow = document.body.style.overflow
     const onKeyDown = event => {

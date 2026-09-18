@@ -8,6 +8,7 @@ fi
 
 source_root="source-images"
 image_root="public/images"
+thumbnail_root="$image_root/thumbs"
 
 optimize() {
   local source="$1" width="$2" output="$3" quality="${4:-84}"
@@ -18,6 +19,7 @@ optimize() {
 optimize "$source_root/hero-wedding.jpg" 1920 "$image_root/hero-wedding.webp"
 optimize "$source_root/groom.jpg" 1080 "$image_root/groom.webp"
 optimize "$source_root/bride.jpg" 1080 "$image_root/bride.webp"
+mkdir -p "$thumbnail_root"
 
 gallery_images=(
   DSC06642 DSC06710 DSC06774 DSC06838
@@ -29,6 +31,7 @@ gallery_images=(
 
 for image in "${gallery_images[@]}"; do
   optimize "$source_root/$image.jpg" 1200 "$image_root/$image.webp" 80
+  optimize "$source_root/$image.jpg" 480 "$thumbnail_root/$image.webp" 74
 done
 
-echo "Optimized wedding images into WebP."
+echo "Optimized wedding images and gallery thumbnails into WebP."

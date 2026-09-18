@@ -24,6 +24,13 @@ All notable project changes are recorded here.
 - Made the wishes form card gently translucent so the background photo remains visible.
 - Increased the upward mobile crop of the wishes background image.
 - Removed the photo background from the wishes section and restored its clean cream card treatment.
+- Replaced full-resolution inline gallery images with 480px thumbnails and removed eager decoding of all gallery photos to lower mobile memory and rendering load.
+- Kept the higher-resolution gallery source on desktop while mobile uses the lighter thumbnail variant.
+- Delayed inline carousel columns until their stage has a measured width, preventing the broken first-render layout.
+- Added a paired couple-card entrance, interlocking-ring connector, and coordinated desktop hover movement to visually link the bride and groom profiles.
+- Refined the couple cards with rounded, layered depth and changed the mobile link into an overlapping paired-card composition.
+- Switched the couple cards to a side-by-side mobile layout and added a repeating meet, overlap, gentle shake, and separate motion cycle.
+- Refined the paired-card motion into a soft kiss-like lean and pause, with a synchronized ring heartbeat.
 
 ## 2026-09-13
 

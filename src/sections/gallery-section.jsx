@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { AnimatePresence } from 'motion/react'
 import GalleryCarousel from '../components/gallery-carousel'
 import GalleryLightbox from '../components/gallery-lightbox'
@@ -15,17 +15,6 @@ const crops = {
 export default function GallerySection() {
   const [selectedIndex, setSelectedIndex] = useState(null)
   const opener = useRef(null)
-
-  useEffect(() => {
-    const preload = () => wedding.gallery.forEach(source => {
-      const image = new Image()
-      image.src = source
-      image.decode?.()?.catch(() => {})
-    })
-    const idleId = window.requestIdleCallback?.(preload, { timeout: 2500 })
-    if (!idleId) preload()
-    return () => { if (idleId) window.cancelIdleCallback?.(idleId) }
-  }, [])
 
   const open = index => {
     opener.current = document.activeElement
