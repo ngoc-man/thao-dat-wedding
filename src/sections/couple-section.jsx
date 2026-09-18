@@ -23,7 +23,7 @@ function CoupleCard({ person, bio, direction, reduceMotion }) {
   const pulseClass = direction === 'left' ? 'couple-card-pulse-left' : 'couple-card-pulse-right'
 
   return <motion.div initial={reduceMotion ? false : { opacity: 0, x: initialX, rotateY: initialRotateY }} whileInView={{ opacity: 1, x: 0, rotateY: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduceMotion ? 0.01 : 0.78, delay: direction === 'right' ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }} style={{ transformStyle: 'preserve-3d' }} className={direction === 'left' ? 'relative z-0' : 'relative z-10'}>
-    <div className={`group overflow-hidden rounded-[1.25rem] border border-[#e7cec1] bg-[#fcf9f4] shadow-[0_28px_55px_rgba(91,60,48,0.16),inset_0_1px_0_rgba(255,255,255,0.9)] ${pulseClass}`}>
+    <div className={`group h-full overflow-hidden rounded-[1.25rem] border border-[#e7cec1] bg-[#fcf9f4] shadow-[0_28px_55px_rgba(91,60,48,0.16),inset_0_1px_0_rgba(255,255,255,0.9)] ${pulseClass}`}>
       <div className="aspect-[3/4] overflow-hidden"><img src={person.photo} alt={person.role} className={`h-full w-full -translate-x-[1.5%] scale-[1.03] object-cover transition duration-700 group-hover:scale-105 ${isBride ? 'object-[50%_95%]' : 'object-[50%_80%]'}`} /></div>
       <div className="p-4 sm:p-9"><p className="text-[9px] tracking-[0.16em] text-[#a56c61] uppercase sm:text-xs sm:tracking-[0.24em]">{person.role}</p><h3 className="mt-1.5 font-display text-3xl leading-none tracking-[-0.03em] text-[#4a3029] sm:mt-2 sm:text-5xl">{person.name}</h3><p className="mt-3 text-xs leading-5 text-[#725f56] sm:mt-5 sm:text-sm sm:leading-7">{bio}</p></div>
     </div>

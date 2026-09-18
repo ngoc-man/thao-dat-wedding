@@ -31,6 +31,8 @@ All notable project changes are recorded here.
 - Refined the couple cards with rounded, layered depth and changed the mobile link into an overlapping paired-card composition.
 - Switched the couple cards to a side-by-side mobile layout and added a repeating meet, overlap, gentle shake, and separate motion cycle.
 - Refined the paired-card motion into a soft kiss-like lean and pause, with a synchronized ring heartbeat.
+- Reduced the paired-card motion intensity, added a brighter red ring pulse, and kept all lightweight mobile gallery thumbnails mounted to eliminate delayed white tiles during swipes.
+- Matched the bride and groom card heights in the side-by-side mobile layout.
 
 ## 2026-09-13
 

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { motion, useMotionValue, useMotionValueEvent, useTransform } from 'motion/react'
+import { motion, useMotionValue, useTransform } from 'motion/react'
 import { useInfiniteCarousel } from './use-infinite-carousel'
 
 const PHOTOS_PER_COLUMN = 2
@@ -10,7 +10,6 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
   const [stageWidth, setStageWidth] = useState(null)
   const [visibleColumns, setVisibleColumns] = useState(2)
   const [activeColumn, setActiveColumn] = useState(0)
-  const [renderAnchor, setRenderAnchor] = useState(0)
   const columnCount = Math.ceil(photos.length / PHOTOS_PER_COLUMN)
   const isReady = stageWidth > 0
   const columnWidth = Math.max((stageWidth ?? 0) / visibleColumns, 1)
@@ -21,12 +20,7 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
     maxSteps: Math.min(6, Math.max(columnCount - 1, 1)),
     onSettled: index => {
       setActiveColumn(index)
-      setRenderAnchor(index)
     },
-  })
-  useMotionValueEvent(position, 'change', value => {
-    const nextAnchor = wrap(Math.round(value), columnCount)
-    setRenderAnchor(current => current === nextAnchor ? current : nextAnchor)
   })
 
   useLayoutEffect(() => {
@@ -46,7 +40,7 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
   return (
     <div className="relative mx-auto max-w-7xl">
       <div ref={stage} className="relative aspect-square select-none overflow-hidden rounded-sm touch-pan-y md:aspect-[2/1]" aria-busy={!isReady} {...(isReady ? pointerHandlers : {})}>
-        {isReady && getRenderedColumns(columnCount, visibleColumns, renderAnchor).map(columnIndex => (
+        {isReady && getRenderedColumns(columnCount).map(columnIndex => (
           <GalleryColumn
             key={columnIndex}
             columnIndex={columnIndex}
@@ -57,6 +51,7 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
             photos={photos}
             crops={crops}
             position={position}
+            imageLoading={visibleColumns < 4 ? 'eager' : 'lazy'}
             consumeDraggedClick={consumeDraggedClick}
             onOpen={onOpen}
           />
@@ -68,14 +63,11 @@ export default function GalleryCarousel({ photos, crops, onOpen }) {
   )
 }
 
-function getRenderedColumns(columnCount, visibleColumns, anchor) {
-  if (visibleColumns >= 4) return Array.from({ length: columnCount }, (_, index) => index)
-  const rendered = new Set()
-  for (let offset = -2; offset < visibleColumns + 2; offset += 1) rendered.add(wrap(anchor + offset, columnCount))
-  return [...rendered]
+function getRenderedColumns(columnCount) {
+  return Array.from({ length: columnCount }, (_, index) => index)
 }
 
-function GalleryColumn({ columnIndex, columnCount, columnWidth, visibleColumns, activeColumn, photos, crops, position, consumeDraggedClick, onOpen }) {
+function GalleryColumn({ columnIndex, columnCount, columnWidth, visibleColumns, activeColumn, photos, crops, position, imageLoading, consumeDraggedClick, onOpen }) {
   const metrics = useRef({ columnCount, columnWidth, visibleColumns })
   const width = useMotionValue(columnWidth)
   metrics.current = { columnCount, columnWidth, visibleColumns }
@@ -99,7 +91,7 @@ function GalleryColumn({ columnIndex, columnCount, columnWidth, visibleColumns, 
       {photoIndexes.map(index => <button key={photos[index]} type="button" tabIndex={isInteractive ? 0 : -1} onClick={() => { if (!consumeDraggedClick()) onOpen(index) }} className="group relative min-h-0 overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#fff7ef]" aria-label={`Phóng to ảnh cưới ${index + 1}`}>
         <picture className="block h-full w-full">
           <source media="(min-width: 768px)" srcSet={photos[index]} />
-          <img src={thumbnailPath(photos[index])} alt={`Khoảnh khắc cưới ${index + 1}`} loading="lazy" draggable="false" className={`h-full w-full object-cover [backface-visibility:hidden] ${crops[photos[index]] ?? 'object-center'}`} />
+          <img src={thumbnailPath(photos[index])} alt={`Khoảnh khắc cưới ${index + 1}`} loading={imageLoading} draggable="false" className={`h-full w-full object-cover [backface-visibility:hidden] ${crops[photos[index]] ?? 'object-center'}`} />
         </picture>
         <span className="absolute inset-0 bg-[#4a3029]/0 transition group-hover:bg-[#4a3029]/15" />
       </button>)}
