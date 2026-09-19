@@ -34,6 +34,7 @@ All notable project changes are recorded here.
 - Reduced the paired-card motion intensity, added a brighter red ring pulse, and kept all lightweight mobile gallery thumbnails mounted to eliminate delayed white tiles during swipes.
 - Matched the bride and groom card heights in the side-by-side mobile layout.
 - Changed the music control to a compact vertical volume slider and made mute immediate through the native audio muted state for reliable mobile behavior.
+- Added outside-tap dismissal for the expanded music volume control.
 
 ## 2026-09-13
 
