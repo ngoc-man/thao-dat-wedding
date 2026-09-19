@@ -32,14 +32,24 @@ export default function BackgroundMusic() {
 
   const setAudioVolume = nextVolume => {
     if (!audio.current) return
-    setVolume(nextVolume)
+    const next = Math.max(0, Math.min(nextVolume, 1))
+    setVolume(next)
+    cancelAnimationFrame(volumeFrame.current)
+    if (next === 0) {
+      audio.current.muted = true
+      audio.current.volume = 0
+      return
+    }
+
+    const wasMuted = audio.current.muted
+    audio.current.muted = false
+    if (wasMuted) audio.current.volume = 0
     const startVolume = audio.current.volume
     const startedAt = performance.now()
-    cancelAnimationFrame(volumeFrame.current)
     const easeVolume = now => {
       if (!audio.current) return
       const progress = Math.min((now - startedAt) / 120, 1)
-      audio.current.volume = startVolume + (nextVolume - startVolume) * progress
+      audio.current.volume = startVolume + (next - startVolume) * progress
       if (progress < 1) volumeFrame.current = requestAnimationFrame(easeVolume)
     }
     volumeFrame.current = requestAnimationFrame(easeVolume)
@@ -52,11 +62,18 @@ export default function BackgroundMusic() {
   }
 
   const toggleMute = () => {
+    if (!audio.current) return
     if (volume > 0) {
       lastAudibleVolume.current = volume
-      setAudioVolume(0)
+      cancelAnimationFrame(volumeFrame.current)
+      audio.current.muted = true
+      audio.current.volume = 0
+      setVolume(0)
     } else {
-      setAudioVolume(lastAudibleVolume.current)
+      const restoredVolume = lastAudibleVolume.current
+      audio.current.muted = false
+      audio.current.volume = restoredVolume
+      setVolume(restoredVolume)
     }
   }
 
@@ -65,13 +82,10 @@ export default function BackgroundMusic() {
   return <>
     <audio ref={audio} src="/audio/wedding-theme.mp3" loop preload="metadata" />
     <div className="fixed bottom-5 right-5 z-40">
-      <div aria-hidden={!isVolumeOpen} className={`absolute bottom-14 right-0 w-48 overflow-hidden rounded-xl border border-[#f0c4a8]/70 bg-[#4a3029]/95 p-3 text-[#fff7ef] shadow-[0_16px_40px_rgba(61,35,29,.35)] backdrop-blur transition duration-300 ${isVolumeOpen ? 'translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-3 scale-95 opacity-0'}`}>
-        <div className="flex items-center justify-between">
-          <p className="font-display text-base">Âm lượng</p>
-          <button onClick={toggleMute} tabIndex={isVolumeOpen ? 0 : -1} className="grid h-8 w-8 place-items-center rounded-full bg-[#f0b18c]/15 text-[#f7d5bd] transition hover:bg-[#f0b18c]/25" aria-label={volume ? 'Tắt tiếng' : 'Bật tiếng'} title={volume ? 'Tắt tiếng' : 'Bật tiếng'}>{volume ? <SpeakerIcon /> : <MutedSpeakerIcon />}</button>
-        </div>
+      <div aria-hidden={!isVolumeOpen} className={`absolute bottom-14 right-0 flex w-14 flex-col items-center gap-3 overflow-hidden rounded-2xl border border-[#f0c4a8]/70 bg-[#4a3029]/95 p-2.5 text-[#fff7ef] shadow-[0_16px_40px_rgba(61,35,29,.35)] backdrop-blur transition duration-300 ${isVolumeOpen ? 'translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-3 scale-95 opacity-0'}`}>
         <label className="sr-only" htmlFor="music-volume">Âm lượng nhạc nền</label>
-        <input id="music-volume" type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} tabIndex={isVolumeOpen ? 0 : -1} className="volume-slider mt-3 w-full" style={{ background: `linear-gradient(90deg, #f4b58f ${volume * 100}%, rgb(255 247 239 / .22) ${volume * 100}%)` }} aria-label="Âm lượng nhạc nền" />
+        <input id="music-volume" type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} tabIndex={isVolumeOpen ? 0 : -1} className="volume-slider" style={{ backgroundImage: `linear-gradient(to top, #f4b58f ${volume * 100}%, rgb(255 247 239 / .22) ${volume * 100}%)` }} aria-label="Âm lượng nhạc nền" />
+        <button onClick={toggleMute} tabIndex={isVolumeOpen ? 0 : -1} className="grid min-h-11 min-w-11 place-items-center rounded-full bg-[#f0b18c]/15 text-[#f7d5bd] transition hover:bg-[#f0b18c]/25" aria-label={volume ? 'Tắt tiếng' : 'Bật tiếng'} title={volume ? 'Tắt tiếng' : 'Bật tiếng'}>{volume ? <SpeakerIcon /> : <MutedSpeakerIcon />}</button>
       </div>
       <button onClick={() => setIsVolumeOpen(open => !open)} className="grid min-h-11 min-w-11 place-items-center rounded-full border border-[#d9a98f] bg-[#4a3029]/90 text-[#fff7ef] shadow-lg backdrop-blur transition hover:scale-110 hover:bg-[#82594e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#82594e]" aria-label="Điều chỉnh âm lượng nhạc nền" aria-expanded={isVolumeOpen} title="Điều chỉnh âm lượng">
         {canHearMusic ? <SpeakerIcon /> : <MutedSpeakerIcon />}

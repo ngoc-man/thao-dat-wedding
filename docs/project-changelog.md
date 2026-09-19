@@ -33,6 +33,7 @@ All notable project changes are recorded here.
 - Refined the paired-card motion into a soft kiss-like lean and pause, with a synchronized ring heartbeat.
 - Reduced the paired-card motion intensity, added a brighter red ring pulse, and kept all lightweight mobile gallery thumbnails mounted to eliminate delayed white tiles during swipes.
 - Matched the bride and groom card heights in the side-by-side mobile layout.
+- Changed the music control to a compact vertical volume slider and made mute immediate through the native audio muted state for reliable mobile behavior.
 
 ## 2026-09-13
 
