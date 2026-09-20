@@ -10,7 +10,7 @@ export const wedding = {
   gallery: [
     'DSC06642', 'DSC06710', 'DSC06774', 'DSC06838',
     'DSC06483', 'DSC06530', 'DSC06542', 'DSC06566',
-    'DSC06288', 'DSC06329', 'DSC06367', 'DSC06394', 'DSC06433', 'DSC06464',
+    'DSC06288', 'DSC05855', 'DSC06367', 'DSC06394', 'DSC06433', 'DSC06464',
     'DSC05891', 'DSC06025', 'DSC06134', 'DSC06254', 'DSC06270',
     'DSC05606', 'DSC05670', 'DSC05702', 'DSC05759', 'DSC05838',
   ].map((image) => `/images/${image}.webp`),
